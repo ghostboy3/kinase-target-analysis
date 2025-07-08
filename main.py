@@ -8,7 +8,6 @@ abpp_df = pd.read_excel("ABPP_hek293_candidates_filtered_tyrosine_kinases_kc.xls
 kinase_df["Kinase Classification"] = kinase_df["Kinbase classification"].str.split(":").str[0].str.strip()
 print(kinase_df.columns)
 
-# Merge on HGNC (Kinases) and Genes (ABPP)
 merged_df = abpp_df.merge(
     kinase_df[["HGNC ", "Kinase Classification"]],
     left_on="Genes",
@@ -22,5 +21,3 @@ merged_df.drop(columns=["HGNC "], inplace=True)
 # Save the result (optional)
 merged_df.to_excel("ABPP_with_Kinase_Classification.xlsx", index=False)
 
-# Show result
-print(merged_df[["Genes", "Kinase Classification"]])
