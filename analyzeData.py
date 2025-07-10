@@ -1,6 +1,7 @@
 import streamlit as st
 import plotly.express as px
 import pandas as pd
+import plotly.graph_objects as go
 
 def show_analyze_tab():
 
@@ -47,6 +48,19 @@ def show_analyze_tab():
             else:
                 fig = px.pie(value_counts, names=column, values="Count",
                             title=f"Pie Chart of {column}")
+                # fig.update_traces(textinfo='label+percent+value')
+                # Expand margins and enable zooming
+                # fig.update_layout(
+                # margin=dict(t=60, b=120, l=60, r=60),  # prevent clipping
+                # height=700,  # increase height to fit long labels
+                # )
+
+                # Enable zoom and pan
+                # fig.update_layout(
+                # dragmode='pan',
+                # )
+
+
 
             fig.update_layout(autosize=True, dragmode="zoom")
             st.plotly_chart(fig, use_container_width=True)

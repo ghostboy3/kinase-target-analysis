@@ -35,10 +35,10 @@ def show_merge_tab():
         merge_col1 = st.selectbox("Select merge column from First DataFrame", df1.columns)
         merge_col2 = st.selectbox("Select merge column from Second DataFrame", df2.columns)
         how = st.selectbox("Select merge method", ["inner", "outer", "left", "right"])
-        st.markdown('<a href="https://www.w3schools.com/sql/sql_join.asp" target="_blank">Learn more about merge methods</a>',)
+        st.markdown('<a href="https://www.w3schools.com/sql/sql_join.asp" target="_blank">Learn more about merge methods</a>', unsafe_allow_html=True)
 
         # Column selections
-        st.markdown("###Columns to Include in Merged DataFrame")
+        st.markdown("Columns to Include in Merged DataFrame")
         col3, col4 = st.columns(2)
         with col3:
             cols1 = st.multiselect("Columns from First DataFrame", options=df1.columns.tolist(), default=list(df1.columns))
@@ -63,4 +63,4 @@ def show_merge_tab():
             except Exception as e:
                 st.error(f"Merge failed: {e}")
     else:
-        st.info("Upload two CSV files to get started.")
+        st.info("Upload files to get started.")
