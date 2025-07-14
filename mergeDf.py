@@ -8,18 +8,22 @@ def show_merge_tab():
     st.title("Merge Two DataFrames")
 
     # Upload CSV files
-    st.header("Upload csv or xlsx dataframes")
-    file1 = st.file_uploader("Upload First File", type=["csv", "xlsx"])
-    file2 = st.file_uploader("Upload Second File", type=["csv", "xlsx"])
+    st.header("Upload csv, tsv, or xlsx dataframes")
+    file1 = st.file_uploader("Upload First File", type=["csv", "tsv", "xlsx"])
+    file2 = st.file_uploader("Upload Second File", type=["csv", "tsv", "xlsx"])
 
     if file1 and file2:
         if file1.name.endswith(".csv"):
             df1 = pd.read_csv(file1)
+        elif file1.name.endswith(".tsv"):
+            df1 = pd.read_csv(file1, "\t")
         else:
             df1 = pd.read_excel(file1)
         
         if file2.name.endswith(".csv"):
             df2 = pd.read_csv(file2)
+        elif file2.name.endswith(".tsv"):
+            df2 = pd.read_csv(file2, "\t")
         else:
             df2 = pd.read_excel(file2)
             st.subheader("First DataFrame")

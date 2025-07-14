@@ -8,7 +8,7 @@ def show_analyze_tab():
     st.title("Analyze DataFrame")
 
     # File uploader
-    uploaded_file = st.file_uploader("Choose a CSV or Excel file", type=["csv", "xlsx"])
+    uploaded_file = st.file_uploader("Choose a CSV, TSV, or Excel file", type=["csv", "tsv", "xlsx"])
 
     if uploaded_file is not None:
         try:
