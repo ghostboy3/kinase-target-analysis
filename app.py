@@ -8,11 +8,13 @@ import pandas as pd
 # import numpy as np
 from analyzeData import show_analyze_tab
 from mergeDf import show_merge_tab
+from compareDfs import showCompareTab
 
-analyzeTab, mergeTab = st.tabs([ "Analyze", "Merge"])
+analyzeTab, mergeTab, compareTab = st.tabs([ "Analyze", "Merge", "Compare"])
 
 with analyzeTab:
     show_analyze_tab()
 with mergeTab:
     show_merge_tab()
-    # st.text("hi")
+with compareTab:
+    showCompareTab()

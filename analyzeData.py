@@ -15,6 +15,8 @@ def show_analyze_tab():
             # Determine file type and read accordingly
             if uploaded_file.name.endswith(".csv"):
                 df = pd.read_csv(uploaded_file)
+            elif uploaded_file.name.endswith(".tsv"):
+                df = pd.read_csv(uploaded_file, delimiter="\t")
             else:
                 df = pd.read_excel(uploaded_file)
 

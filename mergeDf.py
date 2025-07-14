@@ -1,3 +1,5 @@
+# TODO: Fix naming the downloaded file
+
 import streamlit as st
 import plotly.express as px
 import pandas as pd
@@ -16,14 +18,14 @@ def show_merge_tab():
         if file1.name.endswith(".csv"):
             df1 = pd.read_csv(file1)
         elif file1.name.endswith(".tsv"):
-            df1 = pd.read_csv(file1, "\t")
+            df1 = pd.read_csv(file1, delimiter="\t")
         else:
             df1 = pd.read_excel(file1)
         
         if file2.name.endswith(".csv"):
             df2 = pd.read_csv(file2)
         elif file2.name.endswith(".tsv"):
-            df2 = pd.read_csv(file2, "\t")
+            df2 = pd.read_csv(file2, delimiter="\t")
         else:
             df2 = pd.read_excel(file2)
             st.subheader("First DataFrame")
@@ -61,8 +63,9 @@ def show_merge_tab():
                 st.subheader("Merged DataFrame")
                 st.dataframe(merged_df)
 
+                filename = st.text_input("Enter the name for your CSV file (without .csv):", "merged")
                 csv = merged_df.to_csv(index=False).encode("utf-8")
-                st.download_button("Download Merged CSV", data=csv, file_name="merged.csv", mime="text/csv")
+                st.download_button("Download Merged CSV", data=csv, file_name=f"{filename}.csv", mime="text/csv")
 
             except Exception as e:
                 st.error(f"Merge failed: {e}")
