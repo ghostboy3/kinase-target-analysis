@@ -1,3 +1,5 @@
+#TODO: Change pie chart to no percentages
+
 import streamlit as st
 import plotly.express as px
 import pandas as pd
@@ -20,8 +22,11 @@ def show_analyze_tab():
             else:
                 df = pd.read_excel(uploaded_file)
 
+            drop_nans = st.checkbox("Drop rows with NaN values")
             st.success("File uploaded successfully!")
 
+            if drop_nans:
+                df = df.dropna()
             # Display the dataframe
             st.subheader("Preview of Data")
             st.dataframe(df)
@@ -41,21 +46,22 @@ def show_analyze_tab():
             st.dataframe(value_counts)
             # Choose chart type
             chart_type = st.radio("Chart type", ["Bar Chart", "Pie Chart"])
+            chart_title = st.text_input("Enter the title for your chart", value="Bar Chart")
 
 
             # Plot
             if chart_type == "Bar Chart":
                 fig = px.bar(value_counts, x=column, y="Count",
-                            title=f"Bar Chart of {column}", text_auto=True)
+                            title=f"{chart_title}", text_auto=True)
             else:
                 fig = px.pie(value_counts, names=column, values="Count",
-                            title=f"Pie Chart of {column}")
-                # fig.update_traces(textinfo='label+percent+value')
+                            title=f"{chart_title}")
+                fig.update_traces(textinfo='label+value')
                 # Expand margins and enable zooming
-                # fig.update_layout(
-                # margin=dict(t=60, b=120, l=60, r=60),  # prevent clipping
-                # height=700,  # increase height to fit long labels
-                # )
+                fig.update_layout(
+                margin=dict(t=60, b=120, l=60, r=60),  # prevent clipping
+                height=700,  # increase height to fit long labels
+                )
 
                 # Enable zoom and pan
                 # fig.update_layout(

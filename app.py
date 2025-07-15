@@ -1,4 +1,5 @@
 # TODO: Blank: Associated proteins, non protein kinases, and isoforms
+# TODO: Add option to filter database
 
 import streamlit as st
 import pandas as pd
