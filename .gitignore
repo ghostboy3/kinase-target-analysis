@@ -2,3 +2,4 @@ myenv
 __pycache__
 .devcontainer
 .ipynb_checkpoints
+.devcontainer
